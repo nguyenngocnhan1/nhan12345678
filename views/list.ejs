@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Đặt Chỗ</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Danh Sách Đặt Chỗ</h1>
+        <a href="/new" class="button">Đặt Chỗ Mới</a>
+        <table class="booking-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Khách Hàng</th>
+                    <th>Ngày</th>
+                    <th>Giờ</th>
+                    <th>Trạng Thái</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% bookings.forEach(booking => { %>
+                    <tr>
+                        <td><%= booking.id %></td>
+                        <td><%= booking.customerName %></td>
+                        <td><%= booking.dateFormatted %></td>
+                        <td><%= booking.timeFormatted %></td>
+                        <td class="status-<%= booking.status.toLowerCase() %>">
+                            <%= booking.status %>
+                        </td>
+                        <td>
+                            <a href="/edit/<%= booking.id %>" class="button-edit">Sửa</a>
+                            <form action="/cancel/<%= booking.id %>" method="POST" style="display: inline;">
+                                <button type="submit" class="button-cancel">Hủy</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
